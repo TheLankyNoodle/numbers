@@ -1,4 +1,5 @@
 import math
+import os
 
 def prep_file(path):
     with open(path, "r") as file:
@@ -6,7 +7,7 @@ def prep_file(path):
         start_len = len(content) #only write the file again if the content is changed
 
         #add a couple of primes if there are none
-        if len(content) < 1:
+        if len(content) < 4:
             content = "2\n3\n5"
             print("prep_file: adding first three primes")
 
@@ -46,14 +47,18 @@ def quick_prime(number, known_primes = []):
     return True
 
 def write_primes(file_path):
+    #NOTE: rough file size will be smaller than final size
     prep_file(file_path)
     with open(file_path, 'r') as file:
         content = file.read()
         largest_prime_so_far = int(content.split('\n')[-1])
      
     with open(file_path, 'a') as file:
-        for i in range(largest_prime_so_far + 2, largest_prime_so_far + 1000, 2):
+        for i in range(largest_prime_so_far + 2, largest_prime_so_far + 1_000_000, 2):
             if quick_prime(i):
                 #print(f"{i} is prime")
                 file.write(f"\n{i}")
+                i += 2
+            #print(f"new primes written to {file_path}")
+        print(f"{file_path} has {os.path.getsize(file_path)} bytes written to it")
 
