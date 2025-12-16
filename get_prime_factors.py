@@ -14,6 +14,7 @@ def get_prime_factors(number):
                         return (start_number, prime_factors)
                     number //= prime
             raise Exception("Run out of primes")
+            #NOTE: Because we are using a list of primes to calculate our prime factors, if we do this to a large enough number we may not have some of the factors in the list, so we would need to either a) find another way to calculate the prime factors after this point or b) generate some more primes
             #TODO: Should probably generate some more primes if we get to this point
 
     print("get_prime_factors: we got here")
