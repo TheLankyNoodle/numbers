@@ -54,7 +54,7 @@ def write_primes(file_path):
         largest_prime_so_far = int(content.split('\n')[-1])
      
     with open(file_path, 'a') as file:
-        for i in range(largest_prime_so_far + 2, largest_prime_so_far + 1_000_000, 2):
+        for i in range(largest_prime_so_far + 2, largest_prime_so_far + 2_000_000, 2):
             if quick_prime(i):
                 #print(f"{i} is prime")
                 file.write(f"\n{i}")
