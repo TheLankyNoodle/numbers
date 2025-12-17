@@ -1,9 +1,18 @@
 
-def get_prime_factors(number):
+def get_prime_factors(number, memofile = ""):
     #TODO: Should memoise, if I store a prime factors dict, then after every division I can check it and potentially save a lot of calculations
+
+    prime_memos = {}
+    if len(memofile) > 0:
+        with open(memofile, "r") as file:
+            n = 2
+            for line in file:
+                prime_memos[n] = tuple(map(lambda x: int(x), line.split(", ")))
+                n += 1
+    
     prime_factors = []
-    start_number = number
-    with open("primes.txt", "r") as prime_list:
+    number_before_divisions = number
+    with open("saved_data/primes.txt", "r") as prime_list:
         while number > 0:
             for line in prime_list:
                 prime = int(line.strip())
@@ -11,11 +20,15 @@ def get_prime_factors(number):
                     #print(f"{number} : {prime}")
                     prime_factors.append(prime)
                     if number == prime:
-                        return (start_number, prime_factors)
+                        return (number_before_divisions, prime_factors)
                     number //= prime
-            raise Exception("Run out of primes")
-            #NOTE: Because we are using a list of primes to calculate our prime factors, if we do this to a large enough number we may not have some of the factors in the list, so we would need to either a) find another way to calculate the prime factors after this point or b) generate some more primes
-            #TODO: Should probably generate some more primes if we get to this point
+            for n in prime_memos:
+                if number % n == 0:
+                    for i in prime_memos[n]:
+                        prime_factors.append(i)
+                        if number == n:
+                            return (number_before_divisions, prime_factors)
+                        number //= n
 
     print("get_prime_factors: we got here")
-    return (start_number, prime_factors)
+    return (number_before_divisions, prime_factors)
