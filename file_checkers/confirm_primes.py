@@ -1,4 +1,4 @@
-from calculate_primes import proper_prime
+from functions.calculate_primes import proper_prime
 import sys
 
 def run():

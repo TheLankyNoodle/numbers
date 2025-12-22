@@ -1,5 +1,9 @@
 import sys
 
+#TODO: Okay we have big problems. Many many millions of incorrect prime factors
+#TODO: I should find out why this has happened, we are having big sections that repeat or are offset by a few hundred numbers here or there
+#TODO: And we should figure out how to make this checker file be more useful, like seeing when a set of numbers in a row are offset or repeat and maybe it could delete the repeats or at least point out where the problem starts
+
 def array_from_line(string):
     result = []
     if len(string.strip()) == 0:

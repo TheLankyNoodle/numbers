@@ -36,6 +36,19 @@ def proper_prime(number):
             return False
     return True
 
+def file_prime_check(line_number, line_text):
+    return proper_prime(int(line_text))
+
+def calculate_next_prime(line_number, line_text):
+    number = int(line_text)
+    while True:
+        if proper_prime(number):
+            return number
+        number += 1
+        if number - int(line_text) > 1_000_000:
+            raise Exception("Might be stuck in a loop, more than 1 million numbers without finding prime")
+
+
 def quick_prime(number, known_primes = []):
     #NOTE: This is not a true is_prime function, it doesnt check for 0,1,2 because it assumes the file has been prepped to include 2,3,5 as the first primes
     if number % 2 == 0:

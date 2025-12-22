@@ -1,4 +1,4 @@
-from get_prime_factors import get_prime_factors
+from functions.get_prime_factors import get_prime_factors
 
 def length_of_file():
     with open("saved_data/prime_factors.txt", "r") as file:
